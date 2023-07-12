@@ -24,15 +24,18 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::get('/bishop', function () {
+    return Inertia::render('bishop');
 });
+Route::get('/Events', function () {
+    return Inertia::render('Events');
+});
+Route::get('/Join', function () {
+    return Inertia::render('Join');
+});
+Route::get('/Contact', function () {
+    return Inertia::render('Contact');
+});
+
 
 require __DIR__.'/auth.php';
