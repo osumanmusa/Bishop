@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 import Navbar from "../Components/Navbar.vue";
 import Footer from "../Components/Footer.vue";
 import Contact from "../Components/Contact.vue";
@@ -284,6 +284,27 @@ const countries = [
 	{"code": "ZW", "code3": "ZWE", "name": "Zimbabwe", "number": "716"},
 	{"code": "AX", "code3": "ALA", "name": "Åland Islands", "number": "248"}
 ];
+
+const eventform = useForm({
+    title: "",
+    firstname: "",
+    lastname: "",
+    city: "",
+    town: "",
+    region: "",
+    country: "",
+    email: "",
+    phone: "",
+    website: "",
+    age: "",
+    gender: "",
+    activity: "",
+    mode: "",
+});
+
+const formsubmit = () => {
+    eventform.post(route("event.reg"));
+};
 </script>
 
 <template>
@@ -291,6 +312,96 @@ const countries = [
 <Navbar/>
     <div class="container-fluid">
         <div class="min-h-screen bg-white">
+<Transition name="fade" mode="out-in">
+                        <div
+                            v-if="$page.props.flash.successmessage"
+                            class="tostr flex mt-2 items-center w-full max-w-xs p-4 space-x-4 text-green-500 bg-gray-100 divide-x divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+                            role="alert"
+                        >
+                            <svg
+                                class="w-7 h-7 text-green-600"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                ></path>
+                            </svg>
+                            <div class="pl-4 text-sm font-normal">
+                                {{ $page.props.flash.successmessage }}
+                            </div>
+                            <button
+                                type="button"
+                                class="justify-end group mr-2 p-2"
+                                @click="
+                                    $page.props.flash.successmessage = false
+                                "
+                            >
+                                <svg
+                                    class="block w-4 h-3 fill-green-800"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="235.908"
+                                    height="235.908"
+                                    viewBox="278.046 126.846 235.908 235.908"
+                                >
+                                    <path
+                                        d="M506.784 134.017c-9.56-9.56-25.06-9.56-34.62 0L396 210.18l-76.164-76.164c-9.56-9.56-25.06-9.56-34.62 0-9.56 9.56-9.56 25.06 0 34.62L361.38 244.8l-76.164 76.165c-9.56 9.56-9.56 25.06 0 34.62 9.56 9.56 25.06 9.56 34.62 0L396 279.42l76.164 76.165c9.56 9.56 25.06 9.56 34.62 0 9.56-9.56 9.56-25.06 0-34.62L430.62 244.8l76.164-76.163c9.56-9.56 9.56-25.06 0-34.62z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </Transition>
+
+                    <Transition name="Efade">
+                        <div
+                            v-if="$page.props.flash.errormessage"
+                            id="toast-simple"
+                            class="tostr flex mt-2 mr-3 items-center w-full max-w-xs p-4 space-x-4 text-red-500 bg-white divide-x divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+                            role="alert"
+                        >
+                            <svg
+                                class="w-7 h-7 text-red-600"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                ></path>
+                            </svg>
+                            <div class="pl-4 text-sm font-normal">
+                                {{ $page.props.flash.errormessage }}
+                            </div>
+                            <button
+                                type="button"
+                                class="justify-end group mr-2 p-2"
+                                @click="$page.props.flash.errormessage = false"
+                            >
+                                <svg
+                                    class="block w-4 h-3 fill-red-600"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="235.908"
+                                    height="235.908"
+                                    viewBox="278.046 126.846 235.908 235.908"
+                                >
+                                    <path
+                                        d="M506.784 134.017c-9.56-9.56-25.06-9.56-34.62 0L396 210.18l-76.164-76.164c-9.56-9.56-25.06-9.56-34.62 0-9.56 9.56-9.56 25.06 0 34.62L361.38 244.8l-76.164 76.165c-9.56 9.56-9.56 25.06 0 34.62 9.56 9.56 25.06 9.56 34.62 0L396 279.42l76.164 76.165c9.56 9.56 25.06 9.56 34.62 0 9.56-9.56 9.56-25.06 0-34.62L430.62 244.8l76.164-76.163c9.56-9.56 9.56-25.06 0-34.62z"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </Transition>
 <section class="bish-bg">
     <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
 
@@ -349,12 +460,13 @@ const countries = [
         EVENT REGISTRATION
     </h1>
     <div>
-        <form action=" " class="justify-center">
+        <form @submit.prevent="formsubmit" class="justify-center">
     <div class="grid gap-4 mb-3 md:grid-cols-3  lg:justify-center lg:mx-44">
         <div class="p-1">
         <select
-            class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+            class="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400" v-model="eventform.title"
         >
+        <option value="" disabled >Title</option>
             <option value="Bishop">Bishop</option>
             <option value="Apostle">Apostle</option>
             <option value="Prophet">Prophet</option>
@@ -366,25 +478,25 @@ const countries = [
         </select>
     </div>
     <div class="p-1">
-        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="First Name " required />
+        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="First Name " v-model="eventform.firstname" required />
     </div>
     
     <div class="">
-        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Last Name " required />
+        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Last Name " v-model="eventform.lastname" required />
     </div>
     
     </div>
     
     <div class="grid gap-4 mb-3 md:grid-cols-3 lg:justify-center lg:mx-44">
     <div class="p-1">
-        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="City " required />
+        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="City " v-model="eventform.city" required />
     </div>
     
     <div class="p-1">
-        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Town/Area " required />
+        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Town/Area " v-model="eventform.town" required />
     </div>    
     <div class="p-1">
-        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="State/Regions/Province " required />
+        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="State/Regions/Province " v-model="eventform.region" required />
     </div>
 
     
@@ -392,17 +504,17 @@ const countries = [
     
     <div class="grid gap-4 mb-3 md:grid-cols-3 lg:justify-center lg:mx-44">
     <div class="p-1">
-    <select id="countries" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"   required>
-        <option disabled selected>Country</option>
-        <option v-for="c in countries" :key="c.id" :value="c.id ">{{ c.name }}</option>
+    <select id="countries" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="eventform.country"  required>
+        <option value="" disabled >Country</option>
+        <option v-for="c in countries" :key="c.id" :value="c.name ">{{ c.name }}</option>
     </select> 
     </div>
     
     <div class="p-1 ">
-        <input type="email"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Email Address " required />
+        <input type="email"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Email Address " v-model="eventform.email" required />
     </div>    
     <div class="p-1 ">
-        <input type="tel"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Mobile Number " required />
+        <input type="tel"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Mobile Number " v-model="eventform.phone" required />
     </div>
     
     
@@ -410,21 +522,21 @@ const countries = [
     
     <div class="grid gap-4 mb-3 md:grid-cols-3 lg:justify-center lg:mx-44">
     <div class="p-1 px-2">
-        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="website" required />
+        <input type="text"  id="floating_phone" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white  border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="website" v-model="eventform.website" required />
 
     </div>
     
     <div class="p-1 ">
-    <select id="countries" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"   required>
-        <option disabled selected>Age</option>
+    <select id="countries" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="eventform.age"   required>
+        <option value="" disabled >Age</option>
         <option value="18-24">18-24 years</option>
     <option value="25-34">25-34 years</option>
     <option value="35+">>35+</option>
     </select>     
     </div>    
     <div class="p-1">
-    <select id="countries" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"   required>
-        <option disabled selected>Gender</option>
+    <select id="countries" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="eventform.gender"   required>
+        <option value="" disabled >Gender</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
     </select> 
@@ -435,18 +547,20 @@ const countries = [
     
     <div class="grid gap-4 mb-3 md:grid-cols-3 lg:justify-center lg:mx-44">
     <div class="p-1">
-    <select id="countries" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"   required>
-        <option value="18-24">Men and Women Relationship Confrence Accra</option>
-    <option value="25-34">Kumasi Ministerial Workshop</option>
+    <select id="countries" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="eventform.activity"   required>
+        <option value="" disabled >Which event will i attend</option>
+        <option value="Men and Women Relationship Confrence Accra">Men and Women Relationship Confrence Accra</option>
+        <option value="Kumasi Ministerial Workshop">Kumasi Ministerial Workshop</option>
     </select> 
     </div>
     
     <div class="p-1">
-    <select id="countries" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"   required>
-    <option value="18-24">In person</option>
-    <option value="25-34">Facebook Live</option>
-    <option value="35+">Instagram Live</option>
-    <option value="35+">Youtube Live</option>
+    <select id="countries" class="block py-2.5 px-3 w-full text-sm text-gray-900 bg-white border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" v-model="eventform.mode"   required>
+        <option value="" disabled >How will i attend</option>
+        <option value="In person">In person</option>
+        <option value="Facebook Live">Facebook Live</option>
+        <option value="Instagram Live">Instagram Live</option>
+        <option value="Youtube Live">Youtube Live</option>
     </select> 
     </div>
 
@@ -462,7 +576,7 @@ const countries = [
 
     <div>
 		<div class="grid gap-4 mb-3 md:grid-cols-3 lg:justify-center lg:mx-44">
-<button class="bg-green-500 text-white border border-lg px-16 py-3  hover:bg-white hover:text-black hover:border border hover:border-black  text-sm text-white  transition duration-200">Submit</button>
+<button class="bg-green-500 text-white border border-lg px-16 py-3  hover:bg-white hover:text-black hover:border border hover:border-black  text-sm text-white  transition duration-200" :disabled="eventform.processing">Submit</button>
     </div>
     </div>
   
@@ -488,6 +602,21 @@ background: rgb(12,49,174);
 }
 .ab-bg{
     background: #14344E;
+}
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 2.5s ease-out;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+.tostr{
+  
+  position:fixed;
+  right:1rem;
+  top:1rem;
+  z-index: 1000;
 }
 
 </style>

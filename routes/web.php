@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\RoutesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +38,11 @@ Route::get('/Contact', function () {
     return Inertia::render('Contact');
 });
 
+Route::post("/getinstouch", [RoutesController::class, "gettouch"])->name('touch.store');
+
+Route::post("/regevent", [RoutesController::class, "storeevent"])->name('event.reg');
+
+Route::post("/regmember", [RoutesController::class, "memberreg"])->name('member.reg');
+Route::post("/regcontact", [RoutesController::class, "contactreg"])->name('contact.reg');
 
 require __DIR__.'/auth.php';

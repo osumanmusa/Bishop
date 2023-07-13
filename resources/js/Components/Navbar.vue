@@ -8,7 +8,7 @@ let showMenu = ref(false);
     
 	<nav class="sticky top-0 nav px-4 py-4 flex justify-between items-center bg-white shadow-md  ">
 		<a class="text-3xl font-bold leading-none" href="#">
-			<img :src="'/img/logo.png'" class="h-20"/>
+			<img :src="'/img/logo.png'" class="h-16"/>
 		</a>
         <div class="grid px-4">
             
@@ -45,9 +45,9 @@ let showMenu = ref(false);
 			</li>
 			<li><a class="text-sm text-gray-800 hover:text-red-500" :href="'/Contact'" :class="{ 'activated': $page.url === '/Contact' }">Contact</a></li>
 		</ul>
-		<a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-blue-600 hover:bg-blue-400 text-sm text-white font-bold  rounded-xl transition duration-200" href="#">Church</a>
-		<a class="hidden lg:inline-block lg:mr-3 py-2 px-6 bg-red-500 hover:bg-red-200 text-sm text-white font-bold rounded-xl transition duration-200" href="#">Work</a>
-        <a class="hidden lg:inline-block py-2 px-6 bg-green-500 hover:bg-green-200 text-sm text-white font-bold rounded-xl transition duration-200" href="#">Business</a>
+		<a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 blue-bg hover:bg-blue-400 text-sm text-white font-bold  rounded-xl transition duration-200" href="#">Church</a>
+		<a class="hidden lg:inline-block lg:mr-3 py-2 px-6 red-bg hover:bg-red-200 text-sm text-white font-bold rounded-xl transition duration-200" href="https://theafricaeducationdirective.com/">Work</a>
+        <a class="hidden lg:inline-block py-2 px-6 green-bg hover:bg-green-200 text-sm text-white font-bold rounded-xl transition duration-200" href="#">Business</a>
 
     </nav>
 	<div 
@@ -90,11 +90,11 @@ let showMenu = ref(false);
 						<a class="block p-4 text-sm font-semibold text-gray-800 hover:bg-blue-50 hover:text-blue-600 rounded" :href="'/Contact'" :class="{ 'activated': $page.url === '/Contact' }">Contact</a>
 					</li>
 					<li class="mb-1 flex justify-between ">
-						<a class="block p-4 text-sm font-semibold lg:ml-auto lg:mr-3 py-2 px-6 blue-bg hover:bg-white text-sm text-white font-bold  rounded-xl transition duration-200" :href="'/Contact'" :class="{ 'activated': $page.url === '/Contact' }">Contact</a>
+						<a class="block p-4 text-sm font-semibold lg:ml-auto lg:mr-3 py-2 px-6 blue-bg hover:bg-white text-sm text-white font-bold  rounded-xl transition duration-200" >Church</a>
 					
-						<a class="block p-4 text-sm font-semibold lg:ml-auto lg:mr-3 py-2 px-6 red-bg hover:bg-white text-sm text-white font-bold  rounded-xl transition duration-200" :href="'/Contact'" :class="{ 'activated': $page.url === '/Contact' }">Contact</a>
+						<a class="block p-4 text-sm font-semibold lg:ml-auto lg:mr-3 py-2 px-6 red-bg hover:bg-white text-sm text-white font-bold  rounded-xl transition duration-200" href="https://theafricaeducationdirective.com/">Work</a>
 						
-						<a class="block p-4 text-sm font-semibold lg:ml-auto lg:mr-3 py-2 px-6 green-bg hover:bg-white text-sm text-white font-bold  rounded-xl transition duration-200" :href="'/Contact'" :class="{ 'activated': $page.url === '/Contact' }">Contact</a>
+						<a class="block p-4 text-sm font-semibold lg:ml-auto lg:mr-3 py-2 px-6 green-bg hover:bg-white text-sm text-white font-bold  rounded-xl transition duration-200" >Business</a>
 					</li>
 				</ul>
 			</div>
